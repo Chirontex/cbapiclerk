@@ -1,6 +1,6 @@
 <?php
 /**
- * CBAPIClerk 0.0.1
+ * CBAPIClerk 0.0.2
  * Copyright (C) 2021 Dmitry Shumilin
  * 
  * MIT License
@@ -25,6 +25,8 @@
  */
 namespace Infernusophiuchus\CBAPIClerk;
 
+use Infernusophiuchus\CBAPIClerk\Exceptions\HandleException;
+
 class Handle
 {
 
@@ -32,10 +34,19 @@ class Handle
     protected $login;
     protected $key;
 
-    public function __construct()
+    public function __construct(string $url, string $login, string $key)
     {
         
-        
+        foreach (['url', 'login', 'key'] as $i => $arg) {
+
+            if (empty($$arg)) throw new HandleException(
+                'The '.$arg.' cannot be empty.',
+                ($i + 1) * -1
+            );
+
+            $this->$arg = $$arg;
+
+        }
 
     }
 
