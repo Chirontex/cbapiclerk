@@ -1,6 +1,6 @@
 <?php
 /**
- * CBAPIClerk 0.3.0
+ * CBAPIClerk 0.6.0
  * Copyright (C) 2021 Dmitry Shumilin
  * 
  * MIT License
@@ -34,6 +34,10 @@ class Handle
     const READ = 'read';
     const UPDATE = 'update';
     const DELETE = 'delete';
+
+    const GROUP = 'group';
+    const TABLE = 'table';
+    const USER = 'user';
 
     protected $url;
     protected $login;
@@ -198,6 +202,52 @@ class Handle
         } else throw new HandleException(
             HandleException::INVALID_ACTION_MESSAGE,
             HandleException::INVALID_ACTION_CODE
+        );
+
+    }
+
+    /**
+     * Allow to use these methods:
+     * dataCreate(array $command),
+     * dataRead(array $command),
+     * dataUpdate(array $command),
+     * dataDelete(array $command),
+     * tableList(), groupList(), userList()
+     * 
+     * @param mixed $name
+     * @param mixed $arguments
+     * 
+     * @return array
+     */
+    public function __call($name, $arguments) : array
+    {
+
+        if (substr($name, 0, 4) === 'data') {
+        
+            $command = is_array($arguments[0]) ? $arguments[0] : [];
+
+            $action = strtolower(substr($name, 4));
+
+            return $this->dataCrud($action, $command);
+
+        } elseif (substr($name, -4) === 'List') return $this->getList(
+            strtolower(substr($name, 0, -4))
+        );
+
+    }
+
+    public function getList(string $entity) : array
+    {
+
+        if ($entity === self::GROUP ||
+            $entity === self::TABLE ||
+            $entity === self::USER) return $this->command(
+                $this->url.'api/'.$entity.'/get_list',
+                ['access_id' => $this->auth()]
+            );
+        else throw new HandleException(
+            HandleException::INVALID_LIST_MESSAGE,
+            HandleException::INVALID_LIST_CODE
         );
 
     }

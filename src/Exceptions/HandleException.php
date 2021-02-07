@@ -19,6 +19,9 @@ class HandleException extends Exception
     const AUTH_FAILURE_MESSAGE = 'Authentication failure.';
 
     const INVALID_ACTION_CODE = -7;
-    const INVALID_ACTION_MESSAGE = 'Invalid command.';
+    const INVALID_ACTION_MESSAGE = 'Invalid action.';
+
+    const INVALID_LIST_CODE = -8;
+    const INVALID_LIST_MESSAGE = 'This entity cannot be listed.';
 
 }
