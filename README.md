@@ -33,7 +33,7 @@ try {
 
 ### Методы и API-маршруты
 
-_/api/data/create_ — **dataCrud**('create', $command), **dataCreate**($command)
+_/api/data/create_ — **dataCrud**('create', $command), **dataCreate**($command) \n
 _/api/data/read_ — **dataCrud**('read', $command), **dataRead**($command)
 _/api/data/update_ — **dataCrud**('update', $command), **dataUpdate**($command)
 _/api/data/delete_ — **dataCrud**('delete', $command), **dataUpdate**($command)
