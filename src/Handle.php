@@ -1,6 +1,6 @@
 <?php
 /**
- * CBAPIClerk 1.0.1
+ * CBAPIClerk 1.0.2
  * Copyright (C) 2021 Dmitry Shumilin
  * 
  * MIT License
@@ -224,7 +224,7 @@ class Handle
      * 
      * @return array
      */
-    public function __call($name, $arguments) : array
+    public function __call(string $name, array $arguments) : array
     {
 
         if (substr($name, 0, 4) === 'data') {
