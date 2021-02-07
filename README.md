@@ -2,7 +2,7 @@
 
 **CBAPIClerk** — это модуль, позволяющий работать с API CRM-системы «Клиентская база», практически не заботясь о реализации.
 
-[![версия](https://img.shields.io/badge/%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F-1.0.1-blue "версия")](htthttps://img.shields.io/badge/%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F-1.0.1-bluep:// "версия") [![версия PHP](https://img.shields.io/badge/PHP-7.3%2B-blue "версия PHP")](httphttps://img.shields.io/badge/PHP-7.3%2B-blue:// "версия PHP")
+[![версия](https://img.shields.io/badge/%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F-1.0.2-blue "версия")](htthttps://img.shields.io/badge/%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F-1.0.2-bluep:// "версия") [![версия PHP](https://img.shields.io/badge/PHP-7.3%2B-blue "версия PHP")](httphttps://img.shields.io/badge/PHP-7.3%2B-blue:// "версия PHP")
 
 ## Установка
 
