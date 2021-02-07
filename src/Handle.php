@@ -1,6 +1,6 @@
 <?php
 /**
- * CBAPIClerk 1.0.0
+ * CBAPIClerk 1.0.1
  * Copyright (C) 2021 Dmitry Shumilin
  * 
  * MIT License
