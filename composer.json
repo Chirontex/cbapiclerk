@@ -1,0 +1,22 @@
+{
+    "name": "inferusophiuchus/cbapiclerk",
+    "type": "library",
+    "description": "This will helps you with Client Base API.",
+    "homepage": "https://github.com/infernusophiuchus/cbapiclerk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitry Shumilin",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Infernusophiuchus\\CBAPIClerk\\": "src",
+            "Infernusophiuchus\\CBAPIClerk\\Exceptions\\": "src/Exceptions"
+        }
+    }
+}
