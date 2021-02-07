@@ -1,6 +1,6 @@
 <?php
 /**
- * CBAPIClerk 0.6.0
+ * CBAPIClerk 1.0.0
  * Copyright (C) 2021 Dmitry Shumilin
  * 
  * MIT License
@@ -38,6 +38,9 @@ class Handle
     const GROUP = 'group';
     const TABLE = 'table';
     const USER = 'user';
+
+    const PERMS = 'perms';
+    const INFO = 'info';
 
     protected $url;
     protected $login;
@@ -212,7 +215,9 @@ class Handle
      * dataRead(array $command),
      * dataUpdate(array $command),
      * dataDelete(array $command),
-     * tableList(), groupList(), userList()
+     * tableList(), tablePerms(int $id),
+     * tableInfo(int $id),
+     * groupList(), userList()
      * 
      * @param mixed $name
      * @param mixed $arguments
@@ -233,9 +238,32 @@ class Handle
         } elseif (substr($name, -4) === 'List') return $this->getList(
             strtolower(substr($name, 0, -4))
         );
+        elseif (substr($name, 0, 5) === 'table') {
+
+            if (is_int($arguments[0])) $id = $arguments[0];
+            else throw new HandleException(
+                HandleException::INVALID_ID_MESSAGE,
+                HandleException::INVALID_ID_CODE
+            );
+
+            return $this->tableDetails(
+                strtolower(substr($name, 5)),
+                $id
+            );
+
+        }
 
     }
 
+    /**
+     * Allow to request the lists of the tables, groups or users.
+     * 
+     * @param string $entity
+     * 
+     * @return array
+     * 
+     * @throws Infernusophiuchus\CBAPIClerk\Exceptions\HandleException
+     */
     public function getList(string $entity) : array
     {
 
@@ -248,6 +276,58 @@ class Handle
         else throw new HandleException(
             HandleException::INVALID_LIST_MESSAGE,
             HandleException::INVALID_LIST_CODE
+        );
+
+    }
+
+    /**
+     * Request table details such as perms or info.
+     * 
+     * @param string $detail
+     * 
+     * @param int $id
+     * 
+     * @return array
+     * 
+     * @throws Infernusophiuchus\CBAPIClerk\Exceptions\HandleException
+     */
+    public function tableDetails(string $detail, int $id) : array
+    {
+
+        $request_uri = 'api/table/';
+
+        if ($detail === self::PERMS) $request_uri .= 'get_'.$detail;
+        elseif ($detail === self::INFO) $request_uri .= $detail;
+        else throw new HandleException(
+            HandleException::INVALID_DETAIL_MESSAGE,
+            HandleException::INVALID_DETAIL_CODE
+        );
+
+        return $this->command(
+            $this->url.$request_uri,
+            [
+                'access_id' => $this->auth(),
+                'id' => $id
+            ]
+        );
+
+    }
+
+    /**
+     * Request the file in the table.
+     * 
+     * @param array $command
+     * 
+     * @return array
+     */
+    public function files(array $command) : array
+    {
+
+        $command['access_id'] = $this->auth();
+
+        return $this->command(
+            $this->url.'api/data/files',
+            $command
         );
 
     }

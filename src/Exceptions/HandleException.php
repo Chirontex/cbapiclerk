@@ -24,4 +24,10 @@ class HandleException extends Exception
     const INVALID_LIST_CODE = -8;
     const INVALID_LIST_MESSAGE = 'This entity cannot be listed.';
 
+    const INVALID_DETAIL_CODE = -9;
+    const INVALID_DETAIL_MESSAGE = 'Invalid table details requested.';
+
+    const INVALID_ID_CODE = -10;
+    const INVALID_ID_MESSAGE = 'Invalid Id.';
+
 }
